@@ -9,13 +9,14 @@
 /* Begin PBXBuildFile section */
 		159746E719F56BBE00752EBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159746E619F56BBE00752EBE /* AppDelegate.swift */; };
 		159746EA19F56BBE00752EBE /* GithubToGo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 159746E819F56BBE00752EBE /* GithubToGo.xcdatamodeld */; };
-		159746EC19F56BBE00752EBE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159746EB19F56BBE00752EBE /* ViewController.swift */; };
 		159746EF19F56BBE00752EBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 159746ED19F56BBE00752EBE /* Main.storyboard */; };
 		159746F119F56BBE00752EBE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 159746F019F56BBE00752EBE /* Images.xcassets */; };
 		159746F419F56BBE00752EBE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 159746F219F56BBE00752EBE /* LaunchScreen.xib */; };
 		1597470019F56BBE00752EBE /* GithubToGoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159746FF19F56BBE00752EBE /* GithubToGoTests.swift */; };
 		1597470A19F56FD500752EBE /* SplitContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1597470919F56FD500752EBE /* SplitContainerViewController.swift */; };
-		1597470C19F59C1500752EBE /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 1597470B19F59C1500752EBE /* README.md */; };
+		15BFA41B19F59FF800F54AF7 /* NetworkController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BFA41A19F59FF800F54AF7 /* NetworkController.swift */; };
+		15BFA42019F5A32800F54AF7 /* RepoSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BFA41F19F5A32800F54AF7 /* RepoSearchViewController.swift */; };
+		15BFA42219F5A70F00F54AF7 /* Repo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BFA42119F5A70F00F54AF7 /* Repo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,7 +34,6 @@
 		159746E519F56BBE00752EBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		159746E619F56BBE00752EBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		159746E919F56BBE00752EBE /* GithubToGo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GithubToGo.xcdatamodel; sourceTree = "<group>"; };
-		159746EB19F56BBE00752EBE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		159746EE19F56BBE00752EBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		159746F019F56BBE00752EBE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		159746F319F56BBE00752EBE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -42,6 +42,9 @@
 		159746FF19F56BBE00752EBE /* GithubToGoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubToGoTests.swift; sourceTree = "<group>"; };
 		1597470919F56FD500752EBE /* SplitContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitContainerViewController.swift; sourceTree = "<group>"; };
 		1597470B19F59C1500752EBE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		15BFA41A19F59FF800F54AF7 /* NetworkController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkController.swift; path = ../NetworkController.swift; sourceTree = "<group>"; };
+		15BFA41F19F5A32800F54AF7 /* RepoSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RepoSearchViewController.swift; path = ../RepoSearchViewController.swift; sourceTree = "<group>"; };
+		15BFA42119F5A70F00F54AF7 /* Repo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Repo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,10 +87,11 @@
 		159746E319F56BBE00752EBE /* GithubToGo */ = {
 			isa = PBXGroup;
 			children = (
+				15BFA41C19F5A09600F54AF7 /* Controller Layer */,
+				15BFA41E19F5A0A700F54AF7 /* View Layer */,
+				15BFA41D19F5A09D00F54AF7 /* Model Layer */,
 				159746E619F56BBE00752EBE /* AppDelegate.swift */,
-				159746EB19F56BBE00752EBE /* ViewController.swift */,
 				159746ED19F56BBE00752EBE /* Main.storyboard */,
-				1597470919F56FD500752EBE /* SplitContainerViewController.swift */,
 				159746F019F56BBE00752EBE /* Images.xcassets */,
 				159746F219F56BBE00752EBE /* LaunchScreen.xib */,
 				159746E819F56BBE00752EBE /* GithubToGo.xcdatamodeld */,
@@ -119,6 +123,31 @@
 				159746FE19F56BBE00752EBE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		15BFA41C19F5A09600F54AF7 /* Controller Layer */ = {
+			isa = PBXGroup;
+			children = (
+				1597470919F56FD500752EBE /* SplitContainerViewController.swift */,
+				15BFA41F19F5A32800F54AF7 /* RepoSearchViewController.swift */,
+				15BFA41A19F59FF800F54AF7 /* NetworkController.swift */,
+			);
+			name = "Controller Layer";
+			sourceTree = "<group>";
+		};
+		15BFA41D19F5A09D00F54AF7 /* Model Layer */ = {
+			isa = PBXGroup;
+			children = (
+				15BFA42119F5A70F00F54AF7 /* Repo.swift */,
+			);
+			name = "Model Layer";
+			sourceTree = "<group>";
+		};
+		15BFA41E19F5A0A700F54AF7 /* View Layer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "View Layer";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,9 +250,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				159746EC19F56BBE00752EBE /* ViewController.swift in Sources */,
+				15BFA42019F5A32800F54AF7 /* RepoSearchViewController.swift in Sources */,
+				15BFA41B19F59FF800F54AF7 /* NetworkController.swift in Sources */,
 				159746E719F56BBE00752EBE /* AppDelegate.swift in Sources */,
-				1597470C19F59C1500752EBE /* README.md in Sources */,
+				15BFA42219F5A70F00F54AF7 /* Repo.swift in Sources */,
 				159746EA19F56BBE00752EBE /* GithubToGo.xcdatamodeld in Sources */,
 				1597470A19F56FD500752EBE /* SplitContainerViewController.swift in Sources */,
 			);
@@ -419,6 +449,7 @@
 				1597470519F56BBE00752EBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1597470619F56BBE00752EBE /* Build configuration list for PBXNativeTarget "GithubToGoTests" */ = {
 			isa = XCConfigurationList;
@@ -427,6 +458,7 @@
 				1597470819F56BBE00752EBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
