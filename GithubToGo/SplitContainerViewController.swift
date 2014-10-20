@@ -9,16 +9,24 @@
 import UIKit
 
 class SplitContainerViewController: UIViewController, UISplitViewControllerDelegate {
+    
+    var menuVC : MenuTableViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let splitVC = self.childViewControllers[0] as UISplitViewController
         splitVC.delegate = self
+        let navVC = splitVC.viewControllers[0] as UINavigationController
+        self.menuVC = navVC.viewControllers[0] as MenuTableViewController
         // Do any additional setup after loading the view.
     }
 
-    func splitViewController(spelitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController!, ontoPrimaryViewController primaryViewController: UIViewController!) -> Bool {
+    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController!, ontoPrimaryViewController primaryViewController: UIViewController!) -> Bool {
+        if self.menuVC.firstLaunch == true {
+            self.menuVC.firstLaunch = false
+            return true
+        }
         return false
     }
-
+    
 }

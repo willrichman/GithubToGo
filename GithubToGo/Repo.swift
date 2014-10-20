@@ -21,9 +21,7 @@ class Repo {
         
         /* Generic error for JSONObject error protocol */
         var error : NSError?
-        
         if let JSONDictionary = NSJSONSerialization.JSONObjectWithData(rawJSONData, options: nil, error: &error) as? NSDictionary {
-            println(JSONDictionary)
             /* Empty array for repos */
             var repos = [Repo]()
             if let searchResultsArray = JSONDictionary["items"] as? NSArray {
@@ -40,5 +38,4 @@ class Repo {
         }
         return nil
     }
-
 }

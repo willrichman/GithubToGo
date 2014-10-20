@@ -22,7 +22,7 @@ class NetworkController {
     }
 
     func searchRepos(searchString: String, completionHandler: (repos: [Repo], errorDescription: String?) -> Void) {
-        let url = NSURL(string: "127.0.0.1:3000")
+        let url = NSURL(string: "http://127.0.0.1:3000")
         
         let session = NSURLSession.sharedSession()
         
@@ -49,6 +49,9 @@ class NetworkController {
                 default:
                     println("something bad happened")
                 }
+            }
+            else {
+                println("Something bad happened")
             }
         })
         

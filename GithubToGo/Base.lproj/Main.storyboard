@@ -26,7 +26,7 @@
         <!--Root View Controller-->
         <scene sceneID="FPd-JD-x7T">
             <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="lLQ-rd-FoO" sceneMemberID="viewController">
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="lLQ-rd-FoO" customClass="MenuTableViewController" customModule="GithubToGo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="sXI-Dw-ujI">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -120,7 +120,7 @@
         <!--Repo Search View Controller-->
         <scene sceneID="KUb-mv-s2y">
             <objects>
-                <viewController id="ErF-i1-CHo" customClass="RepoSearchViewController" customModule="GithubToGo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="ErF-i1-CHo" customClass="RepoSearchViewController" customModule="GithubToGo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ev7-iQ-nPF"/>
                         <viewControllerLayoutGuide type="bottom" id="bUP-Cn-LxA"/>
@@ -129,7 +129,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gKV-kf-tKI">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gKV-kf-tKI">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for repos" id="3wV-pI-eE1">
@@ -141,17 +141,39 @@
                                     </connections>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="&quot;SEARCH_RESULT&quot;" id="AG1-Vf-KhZ">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SEARCH_RESULT" id="AG1-Vf-KhZ" customClass="RepoCell" customModule="GithubToGo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="AG1-Vf-KhZ" id="lrK-F7-oaj">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8AQ-f4-L7w">
+                                                    <rect key="frame" x="8" y="11" width="42" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8AQ-f4-L7w" firstAttribute="leading" secondItem="lrK-F7-oaj" secondAttribute="leadingMargin" id="YYS-4Z-sUJ"/>
+                                                <constraint firstItem="8AQ-f4-L7w" firstAttribute="top" secondItem="lrK-F7-oaj" secondAttribute="topMargin" constant="3" id="h8r-oE-gut"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="8AQ-f4-L7w" secondAttribute="bottom" constant="4" id="iep-nn-88a"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="label" destination="8AQ-f4-L7w" id="Rvx-2O-ifi"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="gKV-kf-tKI" firstAttribute="leading" secondItem="hQz-YU-0C1" secondAttribute="leadingMargin" constant="-16" id="C7c-9O-BwV"/>
+                            <constraint firstItem="bUP-Cn-LxA" firstAttribute="top" secondItem="gKV-kf-tKI" secondAttribute="bottom" id="fae-jv-xwy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="gKV-kf-tKI" secondAttribute="trailing" constant="-16" id="mZb-DJ-B2H"/>
+                            <constraint firstItem="gKV-kf-tKI" firstAttribute="top" secondItem="Ev7-iQ-nPF" secondAttribute="bottom" id="ucV-i3-zTK"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="searchBar" destination="3wV-pI-eE1" id="X9c-2w-dJP"/>

@@ -17,6 +17,7 @@ class RepoSearchViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.dataSource = self
         NetworkController.controller.searchRepos("Tetris", completionHandler: { (repos, errorDescription) -> Void in
             self.results = repos
             self.tableView.reloadData()
@@ -30,14 +31,14 @@ class RepoSearchViewController: UIViewController, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count
+        return self.results.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("SEARCH_RESULT") as UITableViewCell
-        cell.textLabel?.text = results[indexPath.row].name
+        let cell = tableView.dequeueReusableCellWithIdentifier("SEARCH_RESULT") as RepoCell
+        cell.label.text = self.results[indexPath.row].name
+        println("Refreshed")
         return cell
     }
-
 
 }

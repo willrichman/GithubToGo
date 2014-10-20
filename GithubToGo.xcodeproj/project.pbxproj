@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1534226519F5B51F00589C9C /* RepoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534226419F5B51F00589C9C /* RepoCell.swift */; };
+		1534226719F5C6C900589C9C /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1534226619F5C6C900589C9C /* MenuTableViewController.swift */; };
 		159746E719F56BBE00752EBE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 159746E619F56BBE00752EBE /* AppDelegate.swift */; };
 		159746EA19F56BBE00752EBE /* GithubToGo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 159746E819F56BBE00752EBE /* GithubToGo.xcdatamodeld */; };
 		159746EF19F56BBE00752EBE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 159746ED19F56BBE00752EBE /* Main.storyboard */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1534226419F5B51F00589C9C /* RepoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoCell.swift; sourceTree = "<group>"; };
+		1534226619F5C6C900589C9C /* MenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
 		159746E119F56BBE00752EBE /* GithubToGo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GithubToGo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		159746E519F56BBE00752EBE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		159746E619F56BBE00752EBE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,14 +91,10 @@
 		159746E319F56BBE00752EBE /* GithubToGo */ = {
 			isa = PBXGroup;
 			children = (
+				159746E619F56BBE00752EBE /* AppDelegate.swift */,
 				15BFA41C19F5A09600F54AF7 /* Controller Layer */,
 				15BFA41E19F5A0A700F54AF7 /* View Layer */,
 				15BFA41D19F5A09D00F54AF7 /* Model Layer */,
-				159746E619F56BBE00752EBE /* AppDelegate.swift */,
-				159746ED19F56BBE00752EBE /* Main.storyboard */,
-				159746F019F56BBE00752EBE /* Images.xcassets */,
-				159746F219F56BBE00752EBE /* LaunchScreen.xib */,
-				159746E819F56BBE00752EBE /* GithubToGo.xcdatamodeld */,
 				159746E419F56BBE00752EBE /* Supporting Files */,
 			);
 			path = GithubToGo;
@@ -129,7 +129,9 @@
 			isa = PBXGroup;
 			children = (
 				1597470919F56FD500752EBE /* SplitContainerViewController.swift */,
+				1534226619F5C6C900589C9C /* MenuTableViewController.swift */,
 				15BFA41F19F5A32800F54AF7 /* RepoSearchViewController.swift */,
+				1534226419F5B51F00589C9C /* RepoCell.swift */,
 				15BFA41A19F59FF800F54AF7 /* NetworkController.swift */,
 			);
 			name = "Controller Layer";
@@ -138,6 +140,7 @@
 		15BFA41D19F5A09D00F54AF7 /* Model Layer */ = {
 			isa = PBXGroup;
 			children = (
+				159746E819F56BBE00752EBE /* GithubToGo.xcdatamodeld */,
 				15BFA42119F5A70F00F54AF7 /* Repo.swift */,
 			);
 			name = "Model Layer";
@@ -146,6 +149,9 @@
 		15BFA41E19F5A0A700F54AF7 /* View Layer */ = {
 			isa = PBXGroup;
 			children = (
+				159746F019F56BBE00752EBE /* Images.xcassets */,
+				159746F219F56BBE00752EBE /* LaunchScreen.xib */,
+				159746ED19F56BBE00752EBE /* Main.storyboard */,
 			);
 			name = "View Layer";
 			sourceTree = "<group>";
@@ -251,8 +257,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				15BFA42019F5A32800F54AF7 /* RepoSearchViewController.swift in Sources */,
+				1534226519F5B51F00589C9C /* RepoCell.swift in Sources */,
 				15BFA41B19F59FF800F54AF7 /* NetworkController.swift in Sources */,
 				159746E719F56BBE00752EBE /* AppDelegate.swift in Sources */,
+				1534226719F5C6C900589C9C /* MenuTableViewController.swift in Sources */,
 				15BFA42219F5A70F00F54AF7 /* Repo.swift in Sources */,
 				159746EA19F56BBE00752EBE /* GithubToGo.xcdatamodeld in Sources */,
 				1597470A19F56FD500752EBE /* SplitContainerViewController.swift in Sources */,
