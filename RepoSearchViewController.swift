@@ -17,7 +17,10 @@ class RepoSearchViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        NetworkController.controller.searchRepos("Tetris", completionHandler: { (repos, errorDescription) -> Void in
+            self.results = repos
+            self.tableView.reloadData()
+        })
         // Do any additional setup after loading the view.
     }
     

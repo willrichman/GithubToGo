@@ -10,10 +10,35 @@ import Foundation
 
 class Repo {
     var name : String
-    var user : String
+    var url : String
     
-    init(name: String, user: String) {
+    init(name: String, url: String) {
         self.name = name
-        self.user = user
+        self.url = url
     }
+    
+    class func parseJSONDataIntoRepos(rawJSONData : NSData) -> [Repo]? {
+        
+        /* Generic error for JSONObject error protocol */
+        var error : NSError?
+        
+        if let JSONDictionary = NSJSONSerialization.JSONObjectWithData(rawJSONData, options: nil, error: &error) as? NSDictionary {
+            println(JSONDictionary)
+            /* Empty array for repos */
+            var repos = [Repo]()
+            if let searchResultsArray = JSONDictionary["items"] as? NSArray {
+                for result in searchResultsArray {
+                    if let resultDictionary = result as? NSDictionary {
+                        let resultName = resultDictionary["full_name"] as String
+                        let resultURL = resultDictionary["html_url"] as String
+                        let newRepo = Repo(name: resultName, url: resultURL)
+                        repos.append(newRepo)
+                    }
+                }
+            }
+            return repos
+        }
+        return nil
+    }
+
 }
