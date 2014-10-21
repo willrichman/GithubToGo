@@ -18,6 +18,7 @@ class NetworkController {
     let redirectURL = "redirect_uri=githubtogo://test"
     let githubPOSTURL = "https://github.com/login/oauth/access_token"
     var networkSession : NSURLSession?
+    var oAuthToken : String?
     
     class var controller: NetworkController {
     struct Static {
@@ -64,15 +65,18 @@ class NetworkController {
                         var tokenResponse = NSString(data: data, encoding: NSASCIIStringEncoding)
                         println(tokenResponse!)
                         let responseComponents = tokenResponse?.componentsSeparatedByString("&")
-                        let oAuthToken: String = responseComponents?.first?.componentsSeparatedByString("access_token=").last as String
-                        
+                        self.oAuthToken = responseComponents?.first?.componentsSeparatedByString("access_token=").last as? String
                         var configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-                        let tokenKey : NSString = "token \(oAuthToken)"
-                        configuration.HTTPAdditionalHeaders = ["Authorization": tokenKey] as NSDictionary
+                        let tokenKey : NSString = "token \(self.oAuthToken!)"
+                        configuration.HTTPAdditionalHeaders = ["Authorization": tokenKey]
                         self.networkSession = NSURLSession(configuration: configuration)
+                        
+                        let key = "OAuthToken"
+                        NSUserDefaults.standardUserDefaults().setValue(self.oAuthToken, forKey: key)
+                        NSUserDefaults.standardUserDefaults().synchronize()
                     default:
-                        print("default case on status code")
-                        print(httpResponse.statusCode)
+                        println("default case on status code")
+                        println(httpResponse.statusCode)
                     }
                 }
             }

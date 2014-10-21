@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9tR-Gr-7vP">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9tR-Gr-7vP">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -132,13 +132,10 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="gKV-kf-tKI">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search for repos" id="3wV-pI-eE1">
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="ark-Op-nYM">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardAppearance="light" returnKeyType="search" enablesReturnKeyAutomatically="YES"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="ErF-i1-CHo" id="kua-dW-ni4"/>
-                                    </connections>
+                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SEARCH_RESULT" id="AG1-Vf-KhZ" customClass="RepoCell" customModule="GithubToGo" customModuleProvider="target">
@@ -166,17 +163,24 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gbm-rv-ULN">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="gKV-kf-tKI" firstAttribute="leading" secondItem="hQz-YU-0C1" secondAttribute="leadingMargin" constant="-16" id="C7c-9O-BwV"/>
+                            <constraint firstAttribute="centerY" secondItem="gbm-rv-ULN" secondAttribute="centerY" id="EGg-BV-bEz"/>
                             <constraint firstItem="bUP-Cn-LxA" firstAttribute="top" secondItem="gKV-kf-tKI" secondAttribute="bottom" id="fae-jv-xwy"/>
+                            <constraint firstAttribute="centerX" secondItem="gbm-rv-ULN" secondAttribute="centerX" id="jlK-7W-Nt5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gKV-kf-tKI" secondAttribute="trailing" constant="-16" id="mZb-DJ-B2H"/>
                             <constraint firstItem="gKV-kf-tKI" firstAttribute="top" secondItem="Ev7-iQ-nPF" secondAttribute="bottom" id="ucV-i3-zTK"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="searchBar" destination="3wV-pI-eE1" id="X9c-2w-dJP"/>
+                        <outlet property="activityIndicator" destination="gbm-rv-ULN" id="dFQ-tl-eWP"/>
+                        <outlet property="searchBar" destination="ark-Op-nYM" id="Yke-Mv-qHf"/>
                         <outlet property="searchDisplayController" destination="76o-Ui-53c" id="QvV-yi-gGW"/>
                         <outlet property="tableView" destination="gKV-kf-tKI" id="Pul-Rd-EKM"/>
                     </connections>
@@ -185,7 +189,6 @@
                 <searchDisplayController id="76o-Ui-53c">
                     <connections>
                         <outlet property="delegate" destination="ErF-i1-CHo" id="hPn-sL-IhN"/>
-                        <outlet property="searchBar" destination="3wV-pI-eE1" id="lcU-Mb-IB7"/>
                         <outlet property="searchContentsController" destination="ErF-i1-CHo" id="Uqi-HO-sgo"/>
                         <outlet property="searchResultsDataSource" destination="ErF-i1-CHo" id="9dD-zX-HFL"/>
                         <outlet property="searchResultsDelegate" destination="ErF-i1-CHo" id="to3-ve-sQE"/>

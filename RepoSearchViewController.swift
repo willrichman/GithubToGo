@@ -8,8 +8,9 @@
 
 import UIKit
 
-class RepoSearchViewController: UIViewController, UITableViewDataSource {
+class RepoSearchViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -18,17 +19,10 @@ class RepoSearchViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
-        NetworkController.controller.searchRepos("Tetris", completionHandler: { (repos, errorDescription) -> Void in
-            self.results = repos
-            self.tableView.reloadData()
-        })
-        // Do any additional setup after loading the view.
+        self.searchBar.delegate = self
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    //MARK: - UITableViewDataSource methods
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.results.count
@@ -37,8 +31,28 @@ class RepoSearchViewController: UIViewController, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("SEARCH_RESULT") as RepoCell
         cell.label.text = self.results[indexPath.row].name
-        println("Refreshed")
         return cell
     }
-
+    
+    //MARK: - UISearchBarDelegate methods
+    
+//    
+//    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+//        NetworkController.controller.searchRepos(searchBar.text, completionHandler: { (repos, errorDescription) -> Void in
+//            self.results = repos
+//            self.tableView.reloadData()
+//        })
+//    }
+//
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        self.activityIndicator.startAnimating()
+        NetworkController.controller.searchRepos(searchBar.text, completionHandler: { (repos, errorDescription) -> Void in
+            self.results = repos
+            self.activityIndicator.stopAnimating()
+            self.tableView.reloadData()
+            searchBar.resignFirstResponder()
+        })
+    }
+    
 }
