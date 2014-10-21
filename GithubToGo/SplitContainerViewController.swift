@@ -18,7 +18,10 @@ class SplitContainerViewController: UIViewController, UISplitViewControllerDeleg
         splitVC.delegate = self
         let navVC = splitVC.viewControllers[0] as UINavigationController
         self.menuVC = navVC.viewControllers[0] as MenuTableViewController
-        // Do any additional setup after loading the view.
+        dispatch_after(1, dispatch_get_main_queue(), {
+            NetworkController.controller.requestOAuthAccess()
+        })
+        // Do any additional setup after
     }
 
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController: UIViewController!, ontoPrimaryViewController primaryViewController: UIViewController!) -> Bool {
@@ -28,5 +31,4 @@ class SplitContainerViewController: UIViewController, UISplitViewControllerDeleg
         }
         return false
     }
-    
 }
