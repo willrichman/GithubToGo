@@ -24,6 +24,7 @@ class User {
         /* Generic error for JSONObject error protocol */
         var error : NSError?
         if let JSONDictionary = NSJSONSerialization.JSONObjectWithData(rawJSONData, options: nil, error: &error) as? NSDictionary {
+            println("we got json!")
             /* Empty array for users */
             var users = [User]()
             if let searchResultsArray = JSONDictionary["items"] as? NSArray {

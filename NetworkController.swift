@@ -20,6 +20,10 @@ class NetworkController {
     var networkSession : NSURLSession?
     var oAuthToken : String?
     
+    enum SearchType {
+        case Repos, Users, Error
+    }
+    
     class var controller: NetworkController {
     struct Static {
         static var onceToken : dispatch_once_t = 0
@@ -31,7 +35,30 @@ class NetworkController {
         return Static.instance!
     }
     
+    init() {
+
+        let key = "OAuthToken"
+        if let oAuthToken = NSUserDefaults.standardUserDefaults().valueForKey(key) as? String {
+            println("Found saved OAuthToken")
+            var configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+            let tokenKey : NSString = "token \(oAuthToken)"
+            configuration.HTTPAdditionalHeaders = ["Authorization": tokenKey]
+            self.networkSession = NSURLSession(configuration: configuration)
+            
+        } else {
+            println("No Saved OAuthToken")
+            let authAlert = UIAlertController(title: "Authorize", message: "We need to take you to GitHub to log in to your account", preferredStyle: UIAlertControllerStyle.Alert)
+            let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                self.requestOAuthAccess()
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
+            })
+            
+        }
     
+    }
+    
+    //MARK: - OAuth functions
     
     func requestOAuthAccess() {
         /* Take user from our app to GitHub to request access */
@@ -85,9 +112,21 @@ class NetworkController {
         dataTask.resume()
     }
     
-    func searchRepos(searchString: String, completionHandler: (repos: [Repo], errorDescription: String?) -> Void) {
+    //MARK: - Data fetch functions
+    
+    func search (searchString: String, type: SearchType, completionHandler: (returnedArray: [AnyObject]?, errorDescription: String?) -> Void) {
         let searchReposURL = "https://api.github.com/search/repositories?q="
-        let url = NSURL(string: (searchReposURL + searchString))
+        let searchUsersURL = "https://api.github.com/search/users?q="
+        let cleanedSearch = searchString.stringByReplacingOccurrencesOfString(" ", withString: "+", options: nil, range: nil)
+        var url : NSURL?
+        switch type {
+        case .Repos:
+            url = NSURL(string: (searchReposURL + cleanedSearch))?
+        case .Users:
+            url = NSURL(string: (searchUsersURL + cleanedSearch))?
+        default:
+            println("That is not a valid search type")
+        }
         
         let task = self.networkSession!.dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
             if let httpResponse = response as? NSHTTPURLResponse {
@@ -99,9 +138,18 @@ class NetworkController {
                 switch httpResponse.statusCode {
                 case 200...299:
                     println("Success!!")
-                    let repos = Repo.parseJSONDataIntoRepos(data)
+                    var returnedArray : [AnyObject]?
+                    switch type {
+                    case .Repos:
+                        returnedArray = Repo.parseJSONDataIntoRepos(data)
+                    case .Users:
+                        returnedArray = User.parseJSONDataIntoUsers(data)
+                        println(returnedArray)
+                    default:
+                        println("Something bad happened")
+                    }
                     NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
-                        completionHandler(repos: repos!, errorDescription: nil)
+                        completionHandler(returnedArray: returnedArray, errorDescription: nil)
                     })
                 case 400...499:
                     println("error on the client")
@@ -115,6 +163,40 @@ class NetworkController {
             }
             else {
                 println("Something bad happened")
+            }
+        })
+        
+        task.resume()
+    }
+    
+    //MARK: - UI Fetch functions
+    
+    func getAvatar(avatarURL: String, completionHandler: (image: UIImage?, errorDescription: String?) -> Void) {
+        let url = NSURL(string: avatarURL)
+        let task = self.networkSession!.dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
+            if let httpResponse = response as? NSHTTPURLResponse {
+                if error != nil {
+                    // If there is an error in the web request, print to console
+                    println(error.localizedDescription)
+                }
+                
+                switch httpResponse.statusCode {
+                case 200...299:
+                    println("Got image!")
+                    if let avatarImage = UIImage(data: data) {
+                        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                            completionHandler(image: avatarImage, errorDescription: nil)
+                        })
+                    }
+                case 400...499:
+                    println("error on the client")
+                    println(httpResponse.description)
+                    
+                case 500...599:
+                    println("error on the server")
+                default:
+                    println("something bad happened")
+                }
             }
         })
         

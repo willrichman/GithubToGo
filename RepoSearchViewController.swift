@@ -15,6 +15,7 @@ class RepoSearchViewController: UIViewController, UITableViewDataSource, UISearc
     @IBOutlet weak var tableView: UITableView!
     
     var results = [Repo]()
+    let searchType = NetworkController.SearchType.Repos
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,19 +37,10 @@ class RepoSearchViewController: UIViewController, UITableViewDataSource, UISearc
     
     //MARK: - UISearchBarDelegate methods
     
-//    
-//    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-//        NetworkController.controller.searchRepos(searchBar.text, completionHandler: { (repos, errorDescription) -> Void in
-//            self.results = repos
-//            self.tableView.reloadData()
-//        })
-//    }
-//
-    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         self.activityIndicator.startAnimating()
-        NetworkController.controller.searchRepos(searchBar.text, completionHandler: { (repos, errorDescription) -> Void in
-            self.results = repos
+        NetworkController.controller.search(searchBar.text, type: searchType, completionHandler: { (returnedArray, errorDescription) -> Void in
+            self.results = returnedArray as [Repo]
             self.activityIndicator.stopAnimating()
             self.tableView.reloadData()
             searchBar.resignFirstResponder()
