@@ -18,6 +18,7 @@ class UserSearchViewController: UIViewController, UICollectionViewDataSource, UI
     
     // Save starting location of animation
     var origin: CGRect?
+    var selectedCell : UICollectionViewCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +77,11 @@ class UserSearchViewController: UIViewController, UICollectionViewDataSource, UI
         // Set image and reverseOrigin properties on next view controller
         viewController.image = image
         viewController.reverseOrigin = self.origin!
+//        viewController.imageView.hidden = true
+        let user = self.userResults[indexPath.row]
+        viewController.selectedUser = user
+        
+        self.selectedCell = self.collectionView.cellForItemAtIndexPath(indexPath)
         
         // Trigger a normal push animations; let navigation controller take over.
         self.navigationController?.pushViewController(viewController, animated: true)

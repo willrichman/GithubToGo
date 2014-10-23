@@ -11,26 +11,53 @@ import UIKit
 class HideUserAnimator: NSObject, UIViewControllerAnimatedTransitioning {
    
     var origin: CGRect?
+    var selectedCell : UICollectionViewCell?
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return 1.0
+        return 0.5
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
+        // Find references for the two views controllers we're moving between
         let fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) as ProfileViewController
         let toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey) as UserSearchViewController
         
+        // Grab the container view from the context
         let containerView = transitionContext.containerView()
-        containerView.insertSubview(toViewController.view, aboveSubview: fromViewController.view)
         
-        UIView.animateWithDuration(1.0, delay: 0.0, options: nil, animations: { () -> Void in
-            fromViewController.view.frame = self.origin!
-            fromViewController.imageView.frame = fromViewController.view.bounds
-            toViewController.view.alpha = 1.0
+
+        
+        // Add the toViewController's view onto the containerView
+        containerView.addSubview(toViewController.view)
+        
+        //generate our moving image view
+        let userCell = selectedCell as UserCell
+        
+        var temporaryMovingImage = UIImageView(frame:fromViewController.imageView.frame)
+        temporaryMovingImage.clipsToBounds = true
+        temporaryMovingImage.image = fromViewController.imageView.image
+        containerView.addSubview(temporaryMovingImage)
+        userCell.hidden = true
+        fromViewController.imageView.hidden = true
+        let duration = self.transitionDuration(transitionContext)
+        
+        UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            fromViewController.view.frame.origin = CGPoint(x: toViewController.view.frame.width, y:toViewController.view.frame.origin.y)
+            
+            let finalOrigin = toViewController.collectionView.convertPoint(userCell.frame.origin, toView: toViewController.view)
+            //start the toVC offscreen to the right
+            
+            temporaryMovingImage.frame = CGRect(origin: finalOrigin, size: userCell.userImage.frame.size)
+            
             }) { (finished) -> Void in
-                transitionContext.completeTransition(finished)
+                
+                temporaryMovingImage.removeFromSuperview()
+                userCell.hidden = false
+                transitionContext.completeTransition(true)
+                
         }
     }
+
 
     
 }

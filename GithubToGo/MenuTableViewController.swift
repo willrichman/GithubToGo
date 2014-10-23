@@ -25,20 +25,24 @@ class MenuTableViewController: UITableViewController, UINavigationControllerDele
         // This is called whenever during all navigation operations
         
         // Only return a custom animator for two view controller types
-        if let mainViewController = fromVC as? UserSearchViewController {
+        if let userSearchViewController = fromVC as? UserSearchViewController {
             if let profileViewController = toVC as? ProfileViewController {
                 let animator = ShowUserAnimator()
-                animator.origin = mainViewController.origin
+                animator.origin = userSearchViewController.origin
+                animator.selectedCell = userSearchViewController.selectedCell
                 
                 return animator
             }
         }
         
         else if let profileViewController = fromVC as? ProfileViewController {
-            let animator = HideUserAnimator()
-            animator.origin = profileViewController.reverseOrigin
-            
-            return animator
+            if let userSearchViewController = toVC as? UserSearchViewController {
+                let animator = HideUserAnimator()
+                animator.origin = profileViewController.reverseOrigin
+                animator.selectedCell = userSearchViewController.selectedCell
+                
+                return animator
+            }
         }
         
         // All other types use default transition

@@ -13,9 +13,10 @@ class ShowUserAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     // Rectangle denoting where the animation should start from
     // Used for positioning the toViewController's view
     var origin: CGRect?
+    var selectedCell : UICollectionViewCell?
 
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
-        return 1.0
+        return 0.5
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
@@ -26,23 +27,52 @@ class ShowUserAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         // Grab the container view from the context
         let containerView = transitionContext.containerView()
         
-        // Position the toViewController in it's starting position
-        toViewController.view.frame = self.origin!
-        toViewController.imageView.frame = self.origin!
+//        // Position the toViewController in it's starting position
+//        toViewController.view.frame = self.origin!
+//        toViewController.imageView.frame = self.origin!
+        
+        //start the toVC offscreen to the right
+        toViewController.view.frame = containerView.frame
+        toViewController.view.frame.origin = CGPoint(x: toViewController.view.frame.width, y:toViewController.view.frame.origin.y)
+        containerView.addSubview(toViewController.view)
         
         // Add the toViewController's view onto the containerView
         containerView.addSubview(toViewController.view)
         
-        UIView.animateWithDuration(1.0, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-            // During animation, expand the toViewController's view frame
-            // to match the original view controllers
-            // This will cause the toViewController to fill the screen
-            toViewController.view.frame = fromViewController.view.frame
+        //generate our moving image view
+        let userCell = selectedCell as UserCell
+        let startFrame = fromViewController.collectionView.convertPoint(userCell.frame.origin, toView: fromViewController.view)
+        var temporaryMovingImage = UIImageView(frame:CGRect(x: startFrame.x, y: startFrame.y, width: userCell.frame.width, height: userCell.frame.height))
+        temporaryMovingImage.clipsToBounds = true
+        temporaryMovingImage.image = userCell.userImage.image
+        containerView.addSubview(temporaryMovingImage)
+        userCell.hidden = true
+        let duration = self.transitionDuration(transitionContext)
+        
+        UIView.animateWithDuration(duration, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+            toViewController.view.frame.origin = fromViewController.view.frame.origin
+            
+            println(containerView.frame)
+            println(CGRectGetMidX(containerView.frame))
+            
+            var finalSize = UIScreen.mainScreen().bounds.width - 40
+            var finalX = CGRectGetMidX(toViewController.view.bounds) - (finalSize * 0.5)
+            println(containerView.frame)
+            println(toViewController.view.frame)
+            var finalY = toViewController.imageView.frame.origin.y + 60
+            
+            var finalWidth = toViewController.imageView.frame.width
+            var finalHeight = toViewController.imageView.frame.height
+            
+            temporaryMovingImage.frame = CGRect(x: finalX, y: finalY, width: finalSize, height: finalSize)
+            
             }) { (finished) -> Void in
-                // When finished, hide our fromViewController
-                fromViewController.view.alpha = 0.0
-                // And tell the transitionContext we're done
-                transitionContext.completeTransition(finished)
+                
+                toViewController.imageView.image = temporaryMovingImage.image
+                temporaryMovingImage.removeFromSuperview()
+                userCell.hidden = false
+                transitionContext.completeTransition(true)
+                
         }
     }
 

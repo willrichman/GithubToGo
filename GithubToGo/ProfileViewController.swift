@@ -14,10 +14,10 @@ class ProfileViewController: UIViewController {
     
     var reverseOrigin: CGRect?
     var image: UIImage?
+    var selectedUser : User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.imageView.image = image
     }
 
     
