@@ -47,4 +47,12 @@ class RepoSearchViewController: UIViewController, UITableViewDataSource, UISearc
         })
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "SHOW_REPO" {
+            let destinationVC = segue.destinationViewController as? WebViewController
+            
+        }
+    }
+    
+    
 }
