@@ -96,4 +96,8 @@ class UserSearchViewController: UIViewController, UICollectionViewDataSource, UI
             searchBar.resignFirstResponder()
         })
     }
+    
+    func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+        return text.validate()
+    }
 }
