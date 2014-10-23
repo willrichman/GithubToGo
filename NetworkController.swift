@@ -144,7 +144,6 @@ class NetworkController {
                         returnedArray = Repo.parseJSONDataIntoRepos(data)
                     case .Users:
                         returnedArray = User.parseJSONDataIntoUsers(data)
-                        println(returnedArray)
                     default:
                         println("Something bad happened")
                     }
@@ -182,7 +181,6 @@ class NetworkController {
                 
                 switch httpResponse.statusCode {
                 case 200...299:
-                    println("Got image!")
                     if let avatarImage = UIImage(data: data) {
                         NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
                             completionHandler(image: avatarImage, errorDescription: nil)
