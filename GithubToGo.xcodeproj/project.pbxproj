@@ -153,13 +153,13 @@
 		15BFA41C19F5A09600F54AF7 /* Controller Layer */ = {
 			isa = PBXGroup;
 			children = (
-				155B0AAF19F9693800812D82 /* WebViewController.swift */,
 				15EB853619F868FC00A72F6B /* Animation Controllers */,
 				1597470919F56FD500752EBE /* SplitContainerViewController.swift */,
 				1534226619F5C6C900589C9C /* MenuTableViewController.swift */,
 				15BFA41F19F5A32800F54AF7 /* RepoSearchViewController.swift */,
 				155C698B19F83FB700591841 /* UserSearchViewController.swift */,
 				155B0AB119F9808C00812D82 /* String+Regex.swift */,
+				155B0AAF19F9693800812D82 /* WebViewController.swift */,
 				155C699319F8632B00591841 /* ProfileViewController.swift */,
 				15BFA41A19F59FF800F54AF7 /* NetworkController.swift */,
 			);
@@ -444,7 +444,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = GithubToGo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -457,7 +457,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = GithubToGo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -12,31 +12,24 @@ import WebKit
 class WebViewController: UIViewController {
 
     let webView = WKWebView()
-    
-    override func loadView() {
-        self.view = webView
-    }
+    var repoToView : Repo?
+    let baseURL = "https://github.com/"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.webView.loadRequest(NSURLRequest(URL: NSURL(string: "http://www.google.com/")!))
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        self.view.addSubview(webView)
+        var newOrigin = CGPoint(x: self.view.frame.origin.x, y: 20)
+        var newSize = CGSize(width: self.view.frame.size.width, height: self.view.frame.size.height - 20)
+        
+        self.webView.frame = CGRect(origin: newOrigin, size: newSize)
+        if let urlToShow = NSURL(string: (baseURL + repoToView!.name)) {
+            self.webView.loadRequest(NSURLRequest(URL: urlToShow))
+        }
+        else {
+            self.webView.loadRequest(NSURLRequest(URL: NSURL(string: "http://www.google.com/")!))
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }

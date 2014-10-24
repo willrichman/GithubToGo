@@ -42,4 +42,18 @@ class User {
         return nil
     }
     
+    class func parseJSONDataIntoUser(rawJSONData : NSData) -> User? {
+        
+        var error : NSError?
+        if let JSONDictionary = NSJSONSerialization.JSONObjectWithData(rawJSONData, options: nil, error: &error) as? NSDictionary {
+            var resultName = JSONDictionary["login"] as String
+            var resultURL = JSONDictionary["avatar_url"] as String
+            let user = User(login: resultName, avatarURL: resultURL)
+            return user
+        }
+        
+        return nil
+        
+    }
+    
 }
