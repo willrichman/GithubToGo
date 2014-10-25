@@ -12,10 +12,13 @@ class ProfileViewController: UIViewController {
 
     @IBOutlet weak var login: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var privateRepos: UILabel!
+    @IBOutlet weak var publicRepos: UILabel!
     
     var reverseOrigin: CGRect?
     var image: UIImage?
     var selectedUser : User?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,11 +37,22 @@ class ProfileViewController: UIViewController {
                         self.imageView.image = image
                         self.selectedUser!.avatarImage = image
                         self.login.text = self.selectedUser?.login
+                        self.publicRepos.text = self.selectedUser!.publicRepos!
+                        self.privateRepos.text = self.selectedUser!.privateRepos!
                     })
                 }
             })
+        } else if selectedUser?.publicRepos == nil {
+            self.login.text = self.selectedUser?.login
+            NetworkController.controller.fetchSelectedUser(self.selectedUser!, completionHandler: { (returnedUser, errorDescription) -> Void in
+                self.selectedUser = returnedUser
+                self.publicRepos.text = self.selectedUser!.publicRepos!
+                self.privateRepos.text = self.selectedUser!.privateRepos!
+            })
         } else {
             self.login.text = self.selectedUser?.login
+            self.publicRepos.text = self.selectedUser!.publicRepos!
+            self.privateRepos.text = self.selectedUser!.privateRepos!
         }
         
     }

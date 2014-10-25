@@ -13,6 +13,8 @@ class User {
     var login : String?
     var avatarURL : String?
     var avatarImage : UIImage?
+    var publicRepos : String?
+    var privateRepos : String?
     
     init (login: String, avatarURL : String) {
         self.login = login
@@ -46,9 +48,17 @@ class User {
         
         var error : NSError?
         if let JSONDictionary = NSJSONSerialization.JSONObjectWithData(rawJSONData, options: nil, error: &error) as? NSDictionary {
-            var resultName = JSONDictionary["login"] as String
-            var resultURL = JSONDictionary["avatar_url"] as String
+            let resultName = JSONDictionary["login"] as String
+            let resultURL = JSONDictionary["avatar_url"] as String
             let user = User(login: resultName, avatarURL: resultURL)
+            let publicRepos = JSONDictionary["public_repos"] as? Int
+            user.publicRepos = "\(publicRepos!)"
+            if let privateDictionary = JSONDictionary["plan"] as? NSDictionary {
+                let privateRepos = privateDictionary["private_repos"] as? Int
+                user.privateRepos = "\(privateRepos!)"
+            } else {
+                user.privateRepos = "?"
+            }
             return user
         }
         

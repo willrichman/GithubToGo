@@ -10,7 +10,6 @@ import UIKit
 
 class HideUserAnimator: NSObject, UIViewControllerAnimatedTransitioning {
    
-    var origin: CGRect?
     var selectedCell : UICollectionViewCell?
     
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {

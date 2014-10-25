@@ -16,8 +16,6 @@ class UserSearchViewController: UIViewController, UICollectionViewDataSource, UI
     var userResults = [User]()
     let searchType = NetworkController.SearchType.Users
     
-    // Save starting location of animation
-    var origin: CGRect?
     var selectedCell : UICollectionViewCell?
     
     override func viewDidLoad() {
@@ -59,15 +57,6 @@ class UserSearchViewController: UIViewController, UICollectionViewDataSource, UI
     //MARK: - UICollectionViewDelegate Methods
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        // Grab the attributes of the tapped upon cell
-        let attributes = collectionView.layoutAttributesForItemAtIndexPath(indexPath)
-        
-        // Grab the onscreen rectangle of the tapped upon cell, relative to the collection view
-        let origin = self.view.convertRect(attributes!.frame, fromView: collectionView)
-        
-        // Save our starting location as the tapped upon cells frame
-        self.origin = origin
-        self.origin!.size.height = self.origin!.size.height - 25
         
         // Find tapped image, initialize next view controller
         let image = self.userResults[indexPath.row % self.userResults.count].avatarImage!
@@ -76,8 +65,6 @@ class UserSearchViewController: UIViewController, UICollectionViewDataSource, UI
         
         // Set image and reverseOrigin properties on next view controller
         viewController.image = image
-        viewController.reverseOrigin = self.origin!
-//        viewController.imageView.hidden = true
         let user = self.userResults[indexPath.row]
         viewController.selectedUser = user
         
@@ -118,7 +105,7 @@ class UserSearchViewController: UIViewController, UICollectionViewDataSource, UI
                     UIView.animateWithDuration(0.8, delay: 2.0, options: nil, animations: { () -> Void in
                         warningLabel.alpha = 0.0
                         }, completion: { (finished) -> Void in
-                            //
+                            
                     })
             })
         }

@@ -233,4 +233,38 @@ class NetworkController {
         
         task.resume()
     }
-}
+    
+    func fetchSelectedUser(selectedUser: User, completionHandler: (user: User?, errorDescription: String?) -> Void) {
+        let baseURL = "https://api.github.com/users/"
+        let url = NSURL(string: (baseURL + selectedUser.login!))
+        let task = self.networkSession!.dataTaskWithURL(url!, completionHandler: { (data, response, error) -> Void in
+            if let httpResponse = response as? NSHTTPURLResponse {
+                if error != nil {
+                    println(error.localizedDescription)
+                }
+                switch httpResponse.statusCode {
+                case 200...299:
+                    println("Success!")
+                    if let returnedUser = User.parseJSONDataIntoUser(data) {
+                        NSOperationQueue.mainQueue().addOperationWithBlock({ () -> Void in
+                            completionHandler(user: returnedUser, errorDescription: nil)
+                        })
+                    }
+                case 400...499:
+                    println("error on the client")
+                    println(httpResponse.description)
+                case 500...599:
+                    println("error on the server")
+                    println(httpResponse.description)
+                default:
+                    println("something bad happened")
+                    println(httpResponse.description)
+                }
+                
+            }
+        })
+        
+        task.resume()
+    }
+    
+    }

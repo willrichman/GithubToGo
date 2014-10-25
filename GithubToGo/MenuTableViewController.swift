@@ -28,7 +28,6 @@ class MenuTableViewController: UITableViewController, UINavigationControllerDele
         if let userSearchViewController = fromVC as? UserSearchViewController {
             if let profileViewController = toVC as? ProfileViewController {
                 let animator = ShowUserAnimator()
-                animator.origin = userSearchViewController.origin
                 animator.selectedCell = userSearchViewController.selectedCell
                 
                 return animator
@@ -38,9 +37,7 @@ class MenuTableViewController: UITableViewController, UINavigationControllerDele
         else if let profileViewController = fromVC as? ProfileViewController {
             if let userSearchViewController = toVC as? UserSearchViewController {
                 let animator = HideUserAnimator()
-                animator.origin = profileViewController.reverseOrigin
                 animator.selectedCell = userSearchViewController.selectedCell
-                
                 return animator
             }
         }

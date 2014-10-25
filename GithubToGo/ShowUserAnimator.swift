@@ -10,9 +10,6 @@ import UIKit
 
 class ShowUserAnimator: NSObject, UIViewControllerAnimatedTransitioning {
    
-    // Rectangle denoting where the animation should start from
-    // Used for positioning the toViewController's view
-    var origin: CGRect?
     var selectedCell : UICollectionViewCell?
 
     func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
@@ -27,14 +24,11 @@ class ShowUserAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         // Grab the container view from the context
         let containerView = transitionContext.containerView()
         
-//        // Position the toViewController in it's starting position
-//        toViewController.view.frame = self.origin!
-//        toViewController.imageView.frame = self.origin!
-        
         //start the toVC offscreen to the right
         toViewController.view.frame = containerView.frame
         toViewController.view.frame.origin = CGPoint(x: toViewController.view.frame.width, y:toViewController.view.frame.origin.y)
         containerView.addSubview(toViewController.view)
+        toViewController.imageView.hidden = true
         
         // Add the toViewController's view onto the containerView
         containerView.addSubview(toViewController.view)
@@ -69,6 +63,7 @@ class ShowUserAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             }) { (finished) -> Void in
                 
                 toViewController.imageView.image = temporaryMovingImage.image
+                toViewController.imageView.hidden = false
                 temporaryMovingImage.removeFromSuperview()
                 userCell.hidden = false
                 transitionContext.completeTransition(true)
