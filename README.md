@@ -31,6 +31,6 @@ Done in conjunction with [Reid Weber](https://github.com/Reidweb1)
 
 Challenges:
 
-Implement the 'My Profile' view controller in your app. This should display info about the currently logged in user (their bio, if they are hirable, their count of public and private repos, etc).
-Implement a way for the logged in user to create a repo from the app. Good luck and god bless.
-Implement a way for the user to update their bio.
+- Implement the 'My Profile' view controller in your app. This should display info about the currently logged in user (their bio, if they are hirable, their count of public and private repos, etc).
+- Implement a way for the logged in user to create a repo from the app. Good luck and god bless.
+- Implement a way for the user to update their bio.
